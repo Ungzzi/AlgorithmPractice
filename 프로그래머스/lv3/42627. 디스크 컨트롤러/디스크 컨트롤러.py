@@ -27,8 +27,8 @@ def solution(jobs):
             if work_t == work:
                 working = False
                 jobs_q.popleft()
-
-            work_t += 1
+            else:
+                work_t += 1
 
         t += 1
 
