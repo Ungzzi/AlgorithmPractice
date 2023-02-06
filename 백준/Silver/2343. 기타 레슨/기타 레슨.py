@@ -7,7 +7,7 @@ end = sum(v_list)
 
 
 def cnt_blu(mid):
-    cnt = 0
+    cnt = 1
     v_sum = 0
 
     for i in range(N):
@@ -15,7 +15,7 @@ def cnt_blu(mid):
         if v_sum > mid:
             cnt += 1
             v_sum = v_list[i]
-    return cnt + 1
+    return cnt
 
 
 while start <= end:
