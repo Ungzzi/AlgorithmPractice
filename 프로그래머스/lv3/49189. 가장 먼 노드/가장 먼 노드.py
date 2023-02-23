@@ -10,7 +10,7 @@ def solution(n, edge):
     for i in edge:
         graph[i[0]].append(i[1])
         graph[i[1]].append(i[0])
-
+    
     q.append(1)
     while q:
         cur = q.popleft()
