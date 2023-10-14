@@ -6,8 +6,8 @@
 --     SEX_UPON_INTAKE LIKE 'Intact%'
 
 SELECT DISTINCT
-    I.ANIMAL_ID,
-    I.ANIMAL_TYPE,
+    O.ANIMAL_ID,
+    O.ANIMAL_TYPE,
     I.NAME    
 FROM
     ANIMAL_INS I,
@@ -15,5 +15,5 @@ FROM
 WHERE
     I.ANIMAL_ID = O.ANIMAL_ID
     AND SEX_UPON_INTAKE LIKE 'Intact%'
-    AND SEX_UPON_OUTCOME IN ('Spayed Female', 'Neutered Male')
+    AND (SEX_UPON_OUTCOME LIKE 'Spayed%' OR SEX_UPON_OUTCOME LIKE 'Neutered%')
 ORDER BY 1
