@@ -1,0 +1,19 @@
+-- SELECT
+--     ANIMAL_ID
+-- FROM
+--     ANIMAL_INS
+-- WHERE
+--     SEX_UPON_INTAKE LIKE 'Intact%'
+
+SELECT DISTINCT
+    I.ANIMAL_ID,
+    I.ANIMAL_TYPE,
+    I.NAME    
+FROM
+    ANIMAL_INS I,
+    ANIMAL_OUTS O
+WHERE
+    I.ANIMAL_ID = O.ANIMAL_ID
+    AND SEX_UPON_INTAKE LIKE 'Intact%'
+    AND SEX_UPON_OUTCOME IN ('Spayed Female', 'Neutered Male')
+ORDER BY 1
