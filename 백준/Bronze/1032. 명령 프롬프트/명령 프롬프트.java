@@ -1,7 +1,8 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 public class Main {
@@ -14,27 +15,19 @@ public class Main {
         for (int i = 0; i < N; i++) {
             set.add(br.readLine());
         }
-        int len = set.size();
 
-        Iterator<String> it = set.iterator();
-        String original = it.next();
-        boolean[] check = new boolean[original.length()];
-
-        while (it.hasNext()) {
-            String value = it.next();
-            for (int i = 0; i < original.length(); i++) {
-                if (!check[i] && original.charAt(i) != value.charAt(i)) {
-                    check[i] = true;
+        List<String> files = new ArrayList<>(set);
+        String original = files.get(0);
+        
+        for (int i = 0; i < original.length(); i++) {
+            boolean isSame = true;
+            for (int j = 0; j < set.size(); j++) {
+                if (files.get(j).charAt(i) != original.charAt(i)) {
+                    isSame = false;
+                    break;
                 }
             }
-        }
-
-        for (int i = 0; i < check.length; i++) {
-            if (check[i]) {
-                result += "?";
-            } else {
-                result += original.charAt(i);
-            }
+            result += isSame ? original.charAt(i) : "?";
         }
 
         System.out.println(result);
