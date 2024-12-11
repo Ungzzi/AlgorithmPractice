@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-        String result = "";
+        StringBuilder sb = new StringBuilder();
         Set<String> set = new HashSet<String>();
 
         for (int i = 0; i < N; i++) {
@@ -18,7 +18,7 @@ public class Main {
 
         List<String> files = new ArrayList<>(set);
         String original = files.get(0);
-        
+
         for (int i = 0; i < original.length(); i++) {
             boolean isSame = true;
             for (int j = 0; j < set.size(); j++) {
@@ -27,10 +27,8 @@ public class Main {
                     break;
                 }
             }
-            result += isSame ? original.charAt(i) : "?";
+            sb.append(isSame ? original.charAt(i) : "?");
         }
-
-        System.out.println(result);
-
+        System.out.println(sb);
     }
 }
