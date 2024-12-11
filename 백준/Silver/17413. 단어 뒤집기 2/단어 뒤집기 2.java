@@ -6,23 +6,25 @@ public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String str = br.readLine();
-        Stack<String> stack = new Stack<>();
+        Stack<Character> stack = new Stack<>();
         StringBuilder sb = new StringBuilder();
         String tag = "";
 
         for (int i = 0; i < str.length(); i++) {
-            String c = String.valueOf(str.charAt(i));
+            char c = str.charAt(i);
 
-            if (c.equals("<")) {
+            if (c == '<') {
                 while (!stack.isEmpty()) {
                     sb.append(stack.pop());
                 }
                 tag = "<";
-            } else if (c.equals(">")) {
+            } else if (c == '>') {
                 sb.append(tag + ">");
                 tag = "";
-            } else if (tag.length() <= 0) {
-                if (c.equals(" ")) {
+            } else if (tag.length() > 0) {
+                tag += c;
+            } else {
+                if (c == ' ') {
                     while (!stack.isEmpty()) {
                         sb.append(stack.pop());
                     }
@@ -30,8 +32,6 @@ public class Main {
                 } else {
                     stack.add(c);
                 }
-            } else {
-                tag += c;
             }
 
         }
