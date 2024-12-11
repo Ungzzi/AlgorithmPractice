@@ -8,7 +8,7 @@ public class Main {
         String str = br.readLine();
         Stack<Character> stack = new Stack<>();
         StringBuilder sb = new StringBuilder();
-        String tag = "";
+        boolean flag = false;
 
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
@@ -17,12 +17,13 @@ public class Main {
                 while (!stack.isEmpty()) {
                     sb.append(stack.pop());
                 }
-                tag = "<";
+                sb.append('<');
+                flag = true;
             } else if (c == '>') {
-                sb.append(tag + ">");
-                tag = "";
-            } else if (tag.length() > 0) {
-                tag += c;
+                sb.append('>');
+                flag = false;
+            } else if (flag == true) {
+                sb.append(c);
             } else {
                 if (c == ' ') {
                     while (!stack.isEmpty()) {
