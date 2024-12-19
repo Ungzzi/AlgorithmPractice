@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -10,7 +8,6 @@ public class Main {
     static int N, M;
     static int arr[];
     static int store[];
-    static Map<String, String> map = new HashMap<>();
     static boolean isUsed[];
 
     public static void main(String[] args) throws Exception {
@@ -36,23 +33,20 @@ public class Main {
 
     static void go(int dep) {
         if (dep == M) {
-            StringBuilder sb2 = new StringBuilder();
             for (int i = 0; i < M; i++) {
-                sb2.append(store[i]).append(" ");
+                sb.append(store[i]).append(" ");
             }
-            String num = sb2.toString();
-            if (map.get(num) != null) {
-                return;
-            }
-            map.put(num, "!");
-            sb.append(num).append("\n");
+            sb.append("\n");
             return;
         }
 
+        int before = -1;
+
         for (int i = 0; i < N; i++) {
-            if (!isUsed[i]) {
+            if (!isUsed[i] && before != arr[i]) {
                 isUsed[i] = true;
                 store[dep] = arr[i];
+                before = arr[i];
                 go(dep + 1);
                 isUsed[i] = false;
             }
