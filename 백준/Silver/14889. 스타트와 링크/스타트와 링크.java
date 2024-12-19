@@ -26,16 +26,20 @@ public class Main {
 
     static void go(int dep, int num) {
         if (dep == N / 2) {
-            ArrayList<Integer> start = new ArrayList<>();
-            ArrayList<Integer> link = new ArrayList<>();
+            int start_team = 0;
+            int link_team = 0;
             for (int i = 0; i < N; i++) {
-                if (isSelected[i]) {
-                    start.add(i);
-                } else {
-                    link.add(i);
+                for (int j = i + 1; j < N; j++) {
+                    if (isSelected[i] && isSelected[j]) {
+                        start_team += ability[i][j];
+                        start_team += ability[j][i];
+                    } else if (!isSelected[i] && !isSelected[j]) {
+                        link_team += ability[i][j];
+                        link_team += ability[j][i];
+                    }
                 }
             }
-            diff = Math.min(diff, Math.abs(getScore(start) - getScore(link)));
+            diff = Math.min(diff, Math.abs(start_team - link_team));
             return;
         }
 
@@ -44,18 +48,5 @@ public class Main {
             go(dep + 1, i + 1);
             isSelected[i] = false;
         }
-    }
-
-    static int getScore(ArrayList<Integer> score) {
-        int sum = 0;
-        for (int i = 0; i < N / 2; i++) {
-            for (int j = i + 1; j < N / 2; j++) {
-                int x = score.get(i);
-                int y = score.get(j);
-                sum += ability[x][y];
-                sum += ability[y][x];
-            }
-        }
-        return sum;
     }
 }
